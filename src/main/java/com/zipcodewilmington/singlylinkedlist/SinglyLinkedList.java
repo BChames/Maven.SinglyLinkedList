@@ -1,23 +1,23 @@
 package com.zipcodewilmington.singlylinkedlist;
 
-public class SinglyLinkedList {
+public class SinglyLinkedList<T> {
 
-    static SinglyLinkedList list = new SinglyLinkedList();
-    private Node head;
+    SinglyLinkedList list = new SinglyLinkedList();
+    private Node<T> head;
 
-    static class Node {
+    static class Node<T> {
 
-        int data;
-        Node next;
+        T data;
+        Node<T> next;
 
-        Node(int d) {
+        Node(T d) {
             data = d;
             next = null;
         }
     }
 
     //This method is functioning as needed
-    public static void add(int data) {
+    public void add(T data) {
 
         Node newNode = new Node(data);
         newNode.next = null;
@@ -57,7 +57,7 @@ public class SinglyLinkedList {
     }
 
     //This method is working as needed
-    public static Boolean contains(int value){
+    public Boolean contains(T value){
 
         Node currNode = list.head;
 
@@ -73,7 +73,7 @@ public class SinglyLinkedList {
         return false;
     }
     //This method is functioning as needed
-    public static Integer get(int index){
+    public Object get(int index){
 
         Node currNode = list.head;
         int count = 0;
@@ -91,7 +91,7 @@ public class SinglyLinkedList {
     }
 
     //This method is functioning as needed
-    public static Integer find(int element){
+    public Integer find(T element){
 
         Node currNode = list.head;
         int count = 0;
@@ -108,7 +108,7 @@ public class SinglyLinkedList {
     }
 
     //kind of complete, need remove method to finish testing
-    public static SinglyLinkedList copy(SinglyLinkedList copy){
+    public SinglyLinkedList copy(SinglyLinkedList copy){
 
         //SinglyLinkedList copy = new SinglyLinkedList();
         SinglyLinkedList listCopy = list;
@@ -116,31 +116,45 @@ public class SinglyLinkedList {
 
         return copy;
     }
+/*
 
-    //This method is functioning as needed
-    public SinglyLinkedList sort() {
+    public void sort(){
+        CompareGenerics comp = new CompareGenerics();
 
-        Node currNode = list.head;
-        Node nextNode = currNode.next;
-        Node temp = currNode;
+        Boolean wasChanged;
+        do {
+            Node<T> current = head;
+            Node<T> previous = null;
+            Node<T> next = head.next;
+            wasChanged = false;
 
-        int count = 0;
-
-        while (currNode != null && nextNode != null) {
-            if (currNode.data > nextNode.data) {
-                temp = currNode;
-                currNode = nextNode;
-                nextNode = temp;
-
-                currNode = currNode.next;
-
+            while (next != null) {
+                if (comp.compare(current.data, next.data) > 0) {
+                    wasChanged = true;
+                    if (previous != null) {
+                        Node temp = next.next;
+                        previous.next = next;
+                        next.next = current;
+                        current.next = temp;
+                    } else {
+                        Node temp = next.next;
+                        head = next;
+                        next.next = current;
+                        current.next = temp;
+                    }
+                    previous = next;
+                    next = current.next;
+                } else {
+                    previous = current;
+                    current = next;
+                    next = next.next;
+                }
             }
-
-
-        }
-        return list;
+        } while (wasChanged);
     }
 
+
+ */
     public SinglyLinkedList remove(int index){
 
         Node currNode = list.head;
@@ -173,30 +187,6 @@ public class SinglyLinkedList {
 
         return list;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

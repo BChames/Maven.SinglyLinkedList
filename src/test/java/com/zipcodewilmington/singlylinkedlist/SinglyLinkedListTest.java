@@ -236,5 +236,5 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(expected3,actual3);
         Assert.assertEquals(expected4,actual4);
     }
-    
+
 }
